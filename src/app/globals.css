@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  @apply bg-abyss font-body text-foam antialiased;
+}
+
+::selection { @apply bg-lagoon/40 text-foam; }
+
+/* Preloader gate — server-rendered overlay, shown only while <html> carries
+   this class (added by an inline script before first paint); scroll is
+   locked for the same duration. See src/components/preloader/. */
+html:not(.sc-preload) .sc-preloader { display: none; }
+html.sc-preload { overflow: hidden; }
+
+/* Volumetric god-rays — blurred gradient blades drifting behind the orb */
+.sc-ray {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  width: 140px;
+  height: 120%;
+  transform-origin: top center;
+  filter: blur(28px);
+  background: linear-gradient(to bottom, rgba(127, 219, 212, 0.22), rgba(32, 178, 170, 0.1) 45%, transparent 80%);
+  animation: sc-ray-sway 20s ease-in-out infinite alternate;
+}
+.sc-ray-1 { left: 30%; animation-duration: 18s; animation-delay: -3s; }
+.sc-ray-2 { left: 52%; width: 180px; animation-duration: 24s; animation-delay: -9s; }
+.sc-ray-3 { left: 72%; width: 110px; animation-duration: 21s; animation-delay: -14s; }
+
+@keyframes sc-ray-sway {
+  0% { transform: translateX(-3%) rotate(-2.5deg); }
+  100% { transform: translateX(3%) rotate(2.5deg); }
+}
+
+/* Marine snow — drifts upward to sell that the viewer is sinking */
+.sc-snow {
+  position: absolute;
+  border-radius: 9999px;
+  background: #EFE7D8;
+  animation: sc-snow-rise linear infinite;
+}
+@keyframes sc-snow-rise {
+  from { transform: translateY(0); }
+  to { transform: translateY(-110vh); }
+}
+
+/* Glass orb — layered gradients faking a refractive water-drop lens.
+   Fork point: swap this block for a lazy react-three-fiber scene using
+   MeshTransmissionMaterial if the bundle budget ever allows. */
+.sc-orb {
+  position: relative;
+  width: clamp(160px, 26vw, 260px);
+  height: clamp(160px, 26vw, 260px);
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.5), transparent 40%),
+    radial-gradient(circle at 68% 72%, rgba(127, 219, 212, 0.25), transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(32, 178, 170, 0.18), rgba(4, 30, 48, 0.4) 75%);
+  box-shadow:
+    inset 0 0 40px rgba(127, 219, 212, 0.25),
+    inset 0 -20px 50px rgba(4, 30, 48, 0.5),
+    inset 0 12px 30px rgba(255, 255, 255, 0.15);
+  animation: sc-orb-float 9s ease-in-out infinite;
+}
+.sc-orb-rim {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  -webkit-mask:
+    linear-gradient(#000, #000) padding-box,
+    linear-gradient(#000, #000);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  background: linear-gradient(200deg, #7FDBD4 0%, transparent 35%, transparent 65%, transparent 100%);
+  opacity: 0.6;
+}
+.sc-orb-caustic {
+  position: absolute;
+  inset: 8%;
+  border-radius: 9999px;
+  background: conic-gradient(from 0deg, transparent 0deg, rgba(127, 219, 212, 0.35) 60deg, transparent 140deg, rgba(255, 255, 255, 0.2) 200deg, transparent 280deg, rgba(127, 219, 212, 0.3) 340deg, transparent 360deg);
+  mix-blend-mode: screen;
+  animation: sc-orb-spin 24s linear infinite;
+}
+.sc-orb-highlight {
+  position: absolute;
+  top: 16%;
+  left: 22%;
+  width: 30%;
+  height: 22%;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.55);
+  filter: blur(10px);
+}
+@keyframes sc-orb-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes sc-orb-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-ray, .sc-snow, .sc-orb, .sc-orb-caustic { animation: none; }
+}
+
+/* Underwater light-ray band used behind heroes */
+.rays {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(60% 45% at 50% -10%, rgba(127,219,212,0.28), transparent 70%),
+    linear-gradient(115deg, transparent 42%, rgba(127,219,212,0.06) 46%, transparent 52%),
+    linear-gradient(115deg, transparent 60%, rgba(127,219,212,0.05) 64%, transparent 70%);
+}
+
+/* Journal typography (MDX) */
+.prose-ocean h2 { @apply mt-10 font-display text-2xl font-semibold text-foam; }
+.prose-ocean h3 { @apply mt-8 font-display text-xl font-semibold text-foam; }
+.prose-ocean p { @apply mt-4 leading-relaxed text-foam/75; }
+.prose-ocean ul { @apply mt-4 list-disc space-y-2 pl-6 text-foam/75; }
+.prose-ocean ol { @apply mt-4 list-decimal space-y-2 pl-6 text-foam/75; }
+.prose-ocean a { @apply text-lagoon underline underline-offset-4 hover:text-shallows; }
+.prose-ocean strong { @apply text-foam; }
+.prose-ocean blockquote { @apply mt-6 border-l-2 border-lagoon/60 pl-4 italic text-foam/70; }
+.prose-ocean table { @apply mt-6 w-full border-collapse text-sm; }
+.prose-ocean th { @apply border-b border-foam/20 pb-2 text-left font-gauge text-xs uppercase tracking-widest text-shallows/70; }
+.prose-ocean td { @apply border-b border-foam/10 py-2.5 text-foam/75; }
