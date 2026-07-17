@@ -136,7 +136,7 @@ export default async function LocationPage({ params }: Props) {
           <Reveal><SectionHeading depth={l.depthTag} eyebrow="FAQ" title={`${l.name} — common questions`} /></Reveal>
           <Reveal><FaqAccordion faqs={l.faqs} /></Reveal>
           <Reveal className="mt-12 text-center">
-            <Link href="/#book" className="inline-block rounded-full bg-coral px-8 py-4 font-semibold text-abyss transition hover:brightness-110">
+            <Link href="/#book" className="inline-block rounded-full bg-coral px-8 py-4 font-semibold text-ink transition hover:brightness-110">
               Book a course in {l.name}
             </Link>
           </Reveal>

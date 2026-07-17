@@ -46,7 +46,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${display.variable} ${body.variable} ${gauge.variable}`}
       suppressHydrationWarning
     >
-      <body>
+      <body suppressHydrationWarning>
+        {/* Runs before first paint: applies a saved white-theme choice so
+            returning visitors never see a flash of the default dark theme. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'try{if(localStorage.getItem("sc-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}',
+          }}
+        />
         {/* Runs before first paint: gates the server-rendered preloader overlay
             (and its CSS scroll lock) on there being no "dived this session"
             flag, so first visits never flash unstyled content and repeat
@@ -60,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Preloader />
         <RouteProgress />
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
-        <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:z-[60] focus:bg-lagoon focus:px-4 focus:py-2 focus:text-abyss">
+        <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:z-[60] focus:bg-lagoon focus:px-4 focus:py-2 focus:text-ink">
           Skip to content
         </a>
         <Navbar />

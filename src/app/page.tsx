@@ -42,7 +42,7 @@ export default function HomePage() {
               and unforgettable ocean experiences.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <Link href="#book" className="rounded-full bg-coral px-8 py-4 font-semibold text-abyss transition hover:brightness-110">
+              <Link href="#book" className="rounded-full bg-coral px-8 py-4 font-semibold text-ink transition hover:brightness-110">
                 Book your course
               </Link>
               <Link href="/courses" className="rounded-full border border-foam/25 bg-foam/5 px-8 py-4 font-semibold text-foam backdrop-blur transition hover:bg-foam/10">
@@ -255,7 +255,7 @@ export default function HomePage() {
             <p className="mt-4 text-lg text-foam/70">
               Tell us which course and when. We'll reply within one business day with dates, prep notes, and everything you need.
             </p>
-            <Link href="/book" className="mt-10 inline-block rounded-full bg-coral px-8 py-4 font-semibold text-abyss transition hover:brightness-110">
+            <Link href="/book" className="mt-10 inline-block rounded-full bg-coral px-8 py-4 font-semibold text-ink transition hover:brightness-110">
               Book your course
             </Link>
           </Reveal>

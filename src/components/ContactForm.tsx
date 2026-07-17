@@ -32,7 +32,7 @@ export function ContactForm() {
       {state?.error && <p className="text-sm text-coral">{state.error}</p>}
       <button
         disabled={pending}
-        className="rounded-full bg-coral py-3.5 font-semibold text-abyss transition hover:brightness-110 disabled:opacity-60"
+        className="rounded-full bg-coral py-3.5 font-semibold text-ink transition hover:brightness-110 disabled:opacity-60"
       >
         {pending ? "Sending…" : "Send message"}
       </button>

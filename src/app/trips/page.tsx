@@ -99,7 +99,7 @@ export default function TripsPage() {
         <div className="relative mx-auto max-w-2xl text-center">
           <Reveal>
             <SectionHeading depth="−40 M" eyebrow="Next step" title="Ask us which trip fits your level" />
-            <Link href="/contact" className="inline-block rounded-full bg-coral px-8 py-4 font-semibold text-abyss transition hover:brightness-110">
+            <Link href="/contact" className="inline-block rounded-full bg-coral px-8 py-4 font-semibold text-ink transition hover:brightness-110">
               Get in touch
             </Link>
           </Reveal>

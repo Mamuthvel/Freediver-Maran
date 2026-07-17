@@ -45,7 +45,7 @@ export default function DeepDiveDubaiPage() {
               <p className="mt-1 text-sm text-shallows/70">Freediving & Scuba Instructor</p>
               <p className="mt-1 font-gauge text-xs uppercase tracking-[0.15em] text-lagoon">Based in Dubai</p>
               <p className="mt-4 text-sm leading-relaxed text-foam/65">5+ years teaching and exploring the underwater world.</p>
-              <Link href="/contact" className="mt-6 block rounded-full bg-coral py-2.5 text-center text-sm font-semibold text-abyss transition hover:brightness-110">
+              <Link href="/contact" className="mt-6 block rounded-full bg-coral py-2.5 text-center text-sm font-semibold text-ink transition hover:brightness-110">
                 Get in touch
               </Link>
             </div>
@@ -85,7 +85,7 @@ export default function DeepDiveDubaiPage() {
           <Reveal>
             <h2 className="font-display text-3xl font-semibold text-foam md:text-4xl">Train with Maran in Dubai</h2>
             <p className="mt-4 text-foam/70">Reach out for course dates, availability, and what fits your level.</p>
-            <Link href="/contact" className="mt-8 inline-block rounded-full bg-coral px-8 py-4 font-semibold text-abyss transition hover:brightness-110">
+            <Link href="/contact" className="mt-8 inline-block rounded-full bg-coral px-8 py-4 font-semibold text-ink transition hover:brightness-110">
               Contact us
             </Link>
           </Reveal>

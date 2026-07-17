@@ -22,7 +22,7 @@ export function FloatingCtas() {
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-foam/10 bg-abyss/85 p-3 backdrop-blur-xl md:hidden">
         <Link
           href={pathname.startsWith("/courses/") ? "#book" : "/book"}
-          className="block rounded-full bg-coral py-3 text-center font-semibold text-abyss"
+          className="block rounded-full bg-coral py-3 text-center font-semibold text-ink"
         >
           Book your course
         </Link>

@@ -132,13 +132,13 @@ export function Preloader() {
 
           {/* Depth gauge */}
           <div className="absolute bottom-10 left-6 flex items-end gap-4 sm:left-10">
-            <div className="relative h-24 w-px bg-shallows/15">
+            <div className="relative h-24 w-px bg-[#7FDBD4]/15">
               <div
-                className="absolute inset-x-0 top-0 bg-shallows/60"
+                className="absolute inset-x-0 top-0 bg-[#7FDBD4]/60"
                 style={{ height: `${(reduced ? 1 : progress) * 100}%` }}
               />
             </div>
-            <div className="font-gauge text-shallows/60">
+            <div className="font-gauge text-[#7FDBD4]/60">
               <motion.p
                 className="text-[10px] uppercase tracking-[0.3em]"
                 initial={{ opacity: 0 }}
@@ -149,7 +149,7 @@ export function Preloader() {
               </motion.p>
               <p className="mt-1 text-2xl tabular-nums tracking-[0.15em]">
                 {reduced ? "−40.0" : depthLabel}
-                <span className="ml-2 text-sm text-shallows/40">M</span>
+                <span className="ml-2 text-sm text-[#7FDBD4]/40">M</span>
               </p>
             </div>
           </div>

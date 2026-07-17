@@ -39,7 +39,7 @@ export function LeadForm({ defaultCourse }: { defaultCourse?: string }) {
       </div>
       <button
         disabled={pending}
-        className="sm:col-span-2 rounded-full bg-coral py-3.5 font-semibold text-abyss transition hover:brightness-110 disabled:opacity-60"
+        className="sm:col-span-2 rounded-full bg-coral py-3.5 font-semibold text-ink transition hover:brightness-110 disabled:opacity-60"
       >
         {pending ? "Sending…" : "Request my spot"}
       </button>

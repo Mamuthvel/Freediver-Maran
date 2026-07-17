@@ -2,7 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: dark; }
+:root {
+  color-scheme: dark;
+  --color-abyss: 4 30 48;         /* #041E30 deep ocean floor */
+  --color-trench: 6 42 66;        /* #062A42 section background */
+  --color-ocean: 10 77 104;       /* #0A4D68 mid-depth blue */
+  --color-lagoon: 32 178 170;     /* #20B2AA turquoise accent */
+  --color-shallows: 127 219 212;  /* #7FDBD4 secondary/hover text */
+  --color-sand: 239 231 216;      /* #EFE7D8 */
+  --color-foam: 247 251 252;      /* #F7FBFC primary text */
+}
+
+/* White theme — surfaced by the Navbar toggle, stored in localStorage */
+[data-theme="light"] {
+  color-scheme: light;
+  --color-abyss: 255 255 255;     /* page background */
+  --color-trench: 238 245 246;    /* section background */
+  --color-ocean: 190 227 234;     /* mid-depth blue, lightened */
+  --color-lagoon: 15 118 110;     /* darkened for AA contrast on white */
+  --color-shallows: 47 111 106;   /* darkened for AA contrast on white */
+  --color-sand: 239 231 216;
+  --color-foam: 4 30 48;          /* primary text, dark navy */
+}
 
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
@@ -10,7 +31,7 @@ html { scroll-behavior: smooth; }
 }
 
 body {
-  @apply bg-abyss font-body text-foam antialiased;
+  @apply bg-abyss font-body text-foam antialiased transition-colors duration-300;
 }
 
 ::selection { @apply bg-lagoon/40 text-foam; }

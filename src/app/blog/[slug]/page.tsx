@@ -61,7 +61,7 @@ export default async function PostPage({ params }: Props) {
         </div>
         <div className="mt-16 rounded-2xl border border-lagoon/30 bg-lagoon/10 p-8 text-center">
           <p className="font-display text-2xl text-foam">Ready to try it in the water?</p>
-          <Link href="/courses" className="mt-4 inline-block rounded-full bg-coral px-8 py-3.5 font-semibold text-abyss transition hover:brightness-110">
+          <Link href="/courses" className="mt-4 inline-block rounded-full bg-coral px-8 py-3.5 font-semibold text-ink transition hover:brightness-110">
             See freediving courses
           </Link>
         </div>

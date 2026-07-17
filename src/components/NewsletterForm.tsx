@@ -17,7 +17,7 @@ export function NewsletterForm() {
       />
       <button
         disabled={pending}
-        className="shrink-0 rounded-full bg-lagoon px-4 py-2.5 text-sm font-semibold text-abyss transition hover:brightness-110 disabled:opacity-60"
+        className="shrink-0 rounded-full bg-lagoon px-4 py-2.5 text-sm font-semibold text-ink transition hover:brightness-110 disabled:opacity-60"
       >
         {state?.ok ? "Subscribed" : pending ? "…" : "Join"}
       </button>

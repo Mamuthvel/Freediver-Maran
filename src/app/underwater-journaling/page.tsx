@@ -137,7 +137,7 @@ export default function UnderwaterJournalingPage() {
         <div className="relative mx-auto max-w-2xl text-center">
           <Reveal>
             <h2 className="font-display text-3xl font-semibold text-foam md:text-4xl">Curious to join a session?</h2>
-            <Link href="/contact" className="mt-8 inline-block rounded-full bg-coral px-8 py-4 font-semibold text-abyss transition hover:brightness-110">
+            <Link href="/contact" className="mt-8 inline-block rounded-full bg-coral px-8 py-4 font-semibold text-ink transition hover:brightness-110">
               Get in touch
             </Link>
           </Reveal>

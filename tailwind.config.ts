@@ -1,18 +1,31 @@
 import type { Config } from "tailwindcss";
 
+// Reads each color from a CSS custom property so values can swap per theme
+// (see the `:root` / `[data-theme="light"]` blocks in globals.css) while
+// every `bg-abyss`, `text-foam/70`, etc. utility keeps working unchanged.
+function withOpacity(variable: string) {
+  return ({ opacityValue }: { opacityValue?: string }) =>
+    opacityValue === undefined
+      ? `rgb(var(${variable}))`
+      : `rgb(var(${variable}) / ${opacityValue})`;
+}
+
 const config: Config = {
   content: ["./src/**/*.{ts,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
-        abyss: "#041E30",      // deep ocean floor
-        trench: "#062A42",     // section backgrounds
-        ocean: "#0A4D68",      // deep ocean blue
-        lagoon: "#20B2AA",     // turquoise
-        shallows: "#7FDBD4",   // pale turquoise light
-        sand: "#EFE7D8",
-        foam: "#F7FBFC",       // near-white
-        coral: "#FF6F59",      // accent
+        // Tailwind supports color callbacks at runtime (for the `<alpha-value>`
+        // trick) but its shipped types don't declare that form — cast needed.
+        abyss: withOpacity("--color-abyss") as unknown as string,         // page background
+        trench: withOpacity("--color-trench") as unknown as string,      // section backgrounds
+        ocean: withOpacity("--color-ocean") as unknown as string,        // mid-depth blue
+        lagoon: withOpacity("--color-lagoon") as unknown as string,      // turquoise accent
+        shallows: withOpacity("--color-shallows") as unknown as string,  // secondary/hover text
+        sand: withOpacity("--color-sand") as unknown as string,
+        foam: withOpacity("--color-foam") as unknown as string,          // primary text
+        coral: "#FF6F59",                                                // accent, same in both themes
+        ink: "#041E30",                                                  // always-dark text for bright-surface buttons
       },
       fontFamily: {
         display: ["var(--font-display)"],
@@ -23,7 +36,7 @@ const config: Config = {
         "light-rays":
           "linear-gradient(180deg, rgba(127,219,212,0.22) 0%, rgba(32,178,170,0.10) 32%, rgba(6,42,66,0) 70%)",
         descent:
-          "linear-gradient(180deg, #0A4D68 0%, #062A42 55%, #041E30 100%)",
+          "linear-gradient(180deg, rgb(var(--color-ocean)) 0%, rgb(var(--color-trench)) 55%, rgb(var(--color-abyss)) 100%)",
       },
       animation: {
         drift: "drift 9s ease-in-out infinite",

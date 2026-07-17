@@ -67,7 +67,7 @@ export default async function CoursePage({ params }: Props) {
             <div className="rounded-2xl border border-foam/15 bg-foam/5 p-6 backdrop-blur">
               <p className="font-gauge text-3xl text-lagoon">₹{c.priceInr.toLocaleString("en-IN")}</p>
               <p className="mt-1 text-sm text-foam/60">all-inclusive · {c.duration}</p>
-              <a href="#book" className="mt-4 block rounded-full bg-coral px-8 py-3 text-center font-semibold text-abyss transition hover:brightness-110">
+              <a href="#book" className="mt-4 block rounded-full bg-coral px-8 py-3 text-center font-semibold text-ink transition hover:brightness-110">
                 Book now
               </a>
             </div>
