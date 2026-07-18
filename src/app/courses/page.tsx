@@ -34,8 +34,12 @@ export default function CoursesPage() {
                 <h2 className="mt-4 font-display text-2xl font-semibold text-foam group-hover:text-shallows">{c.name}</h2>
                 <p className="mt-2 text-foam/65">{c.tagline}</p>
                 <p className="mt-6 flex items-center justify-between text-sm">
-                  <span className="text-foam/50">₹{c.priceInr.toLocaleString("en-IN")} all-inclusive</span>
-                  <span className="text-coral group-hover:translate-x-1 transition">Details →</span>
+                  {c.comingSoon ? (
+                    <span className="rounded-full border border-lagoon/40 px-3 py-1 text-xs uppercase tracking-[0.15em] text-lagoon">Coming soon</span>
+                  ) : (
+                    <span className="text-foam/50">₹{c.priceInr.toLocaleString("en-IN")} all-inclusive</span>
+                  )}
+                  <span className="text-coral group-hover:translate-x-1 transition">{c.comingSoon ? "Learn more →" : "Details →"}</span>
                 </p>
               </Link>
             </Reveal>

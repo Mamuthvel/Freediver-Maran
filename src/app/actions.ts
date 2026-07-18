@@ -27,3 +27,16 @@ export async function sendContactMessage(_prev: Result | null, formData: FormDat
   console.log("[contact]", Object.fromEntries(formData));
   return { ok: true };
 }
+
+export async function submitOrder(_prev: Result | null, formData: FormData): Promise<Result> {
+  const email = String(formData.get("email") ?? "");
+  const name = String(formData.get("name") ?? "");
+  const phone = String(formData.get("phone") ?? "");
+  const address = String(formData.get("address") ?? "");
+  const items = String(formData.get("items") ?? "[]");
+  if (!email.includes("@") || name.length < 2 || phone.length < 6 || address.length < 5) {
+    return { ok: false, error: "Please check your name, email, phone, and shipping address." };
+  }
+  console.log("[order]", { name, email, phone, address, items });
+  return { ok: true };
+}

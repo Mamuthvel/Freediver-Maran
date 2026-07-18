@@ -28,7 +28,7 @@ export function Footer() {
                 <Link className="text-foam/70 hover:text-foam" href={`/courses/${c.slug}`}>{c.name}</Link>
               </li>
             ))}
-            <li><Link className="text-foam/70 hover:text-foam" href="/training">How we train</Link></li>
+            <li><Link className="text-foam/70 hover:text-foam" href="/about#how-we-train">How we train</Link></li>
           </ul>
         </nav>
         <nav aria-label="Explore">
@@ -39,10 +39,10 @@ export function Footer() {
                 <Link className="text-foam/70 hover:text-foam" href={`/locations/${l.slug}`}>Freediving in {l.name}</Link>
               </li>
             ))}
-            <li><Link className="text-foam/70 hover:text-foam" href="/trips">Trips & expeditions</Link></li>
             <li><Link className="text-foam/70 hover:text-foam" href="/deep-dive-dubai">Deep Dive Dubai</Link></li>
             <li><Link className="text-foam/70 hover:text-foam" href="/underwater-journaling">Underwater Journaling</Link></li>
             <li><Link className="text-foam/70 hover:text-foam" href="/gallery">Gallery</Link></li>
+            <li><Link className="text-foam/70 hover:text-foam" href="/store">Store</Link></li>
           </ul>
         </nav>
         <nav aria-label="Company">

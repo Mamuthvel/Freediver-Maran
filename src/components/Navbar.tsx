@@ -3,7 +3,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { courses } from "@/lib/courses";
-import { locations } from "@/lib/locations";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 type NavItem = { label: string; href?: string; items?: { label: string; href: string }[] };
@@ -11,24 +10,16 @@ type NavItem = { label: string; href?: string; items?: { label: string; href: st
 const nav: NavItem[] = [
   { label: "About", href: "/about" },
   { label: "Courses", href: "/courses", items: courses.map((c) => ({ label: c.shortName, href: `/courses/${c.slug}` })) },
-  {
-    label: "Destinations",
-    href: "/locations",
-    items: [
-      ...locations.map((l) => ({ label: l.name, href: `/locations/${l.slug}` })),
-      { label: "Trips & Expeditions", href: "/trips" },
-      { label: "Deep Dive Dubai", href: "/deep-dive-dubai" },
-    ],
-  },
-  { label: "Training", href: "/training" },
+  { label: "Deep Dive Dubai", href: "/deep-dive-dubai" },
+  { label: "Underwater Journaling", href: "/underwater-journaling" },
   {
     label: "Explore",
     items: [
       { label: "Gallery", href: "/gallery" },
       { label: "Reviews", href: "/reviews" },
-      { label: "Underwater Journaling", href: "/underwater-journaling" },
     ],
   },
+  { label: "Store", href: "/store" },
   {
     label: "Resources",
     items: [

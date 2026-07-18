@@ -5,6 +5,7 @@ export type Course = {
   name: string;
   shortName: string;
   level: 1 | 2 | 3 | 4;
+  comingSoon?: boolean;
   maxDepth: string; // dive-gauge display, e.g. "−10 M"
   duration: string;
   durationIso: string; // ISO 8601 for structured data
@@ -12,9 +13,11 @@ export type Course = {
   tagline: string;
   overview: string;
   whoFor: string[];
+  experienceNote?: string;
   prerequisites: string[];
   structure: { phase: string; detail: string }[];
   skills: string[];
+  performanceRequirements?: string[];
   safety: string;
   equipment: string[];
   certification: string;
@@ -40,6 +43,7 @@ export const courses: Course[] = [
       "Travellers and adventurers",
       "Anyone wanting to experience the underwater world on a single breath",
     ],
+    experienceNote: "No previous freediving experience is required.",
     prerequisites: [
       "Minimum age 15 years",
       "Able to swim comfortably",
@@ -51,12 +55,14 @@ export const courses: Course[] = [
       { phase: "Confined water", detail: "Static apnea and dynamic apnea in the pool with an instructor at arm's reach." },
     ],
     skills: [
+      "Introduction to breath-hold diving",
       "Breathing and relaxation techniques",
       "Water confidence development",
       "Static breath-hold practice",
       "Introduction to underwater movement",
       "Basic safety and buddy awareness",
       "Introduction to equalisation",
+      "Experience diving to depths of up to 5 metres under instructor supervision",
     ],
     safety:
       "All sessions run at a maximum ratio of one instructor to four students, with one-on-one supervision during every breath-hold. You never hold your breath in water without a trained buddy watching you — that rule starts on day one and never goes away.",
@@ -103,7 +109,14 @@ export const courses: Course[] = [
       "Static apnea training",
       "Dynamic apnea sessions in the pool",
       "Equalisation coaching",
+      "Open water depth sessions",
+      "Safety and rescue procedures",
       "Buddy system training and recovery breathing techniques",
+    ],
+    performanceRequirements: [
+      "Static breath hold session",
+      "Dynamic apnea session",
+      "Open water depth session to course standards",
     ],
     safety:
       "Every open-water session runs on a dive line with an instructor in the water and a dedicated safety lanyard system. Depth progression is individual — you go deeper only when your equalization and comfort say so, never because the schedule does.",
@@ -122,6 +135,7 @@ export const courses: Course[] = [
     name: "PADI Advanced Freediver",
     shortName: "Advanced Freediver",
     level: 3,
+    comingSoon: true,
     maxDepth: "−24 M",
     duration: "3–4 days",
     durationIso: "P4D",
@@ -168,6 +182,7 @@ export const courses: Course[] = [
     name: "PADI Master Freediver",
     shortName: "Master Freediver",
     level: 4,
+    comingSoon: true,
     maxDepth: "−40 M",
     duration: "4–5 days",
     durationIso: "P5D",

@@ -5,10 +5,10 @@ export const site = {
   description:
     "Sea Critter is a PADI Freediving Training Center in India offering internationally recognized freediving certifications — from Basic Freediver to Master Freediver — in Pondicherry, Goa, the Andaman Islands and the Maldives.",
   url: "https://www.seacritter.in",
-  email: "hello@seacritter.in",
-  phone: "+91-98765-43210",
+  email: "pvmaraneyo@gmail.com",
+  phone: "+91-89031-47126",
   hours: "Daily · 7:00 AM – 6:00 PM IST",
-  whatsapp: "https://wa.me/919876543210",
+  whatsapp: "https://wa.me/918903147126",
   instagram: "https://www.instagram.com/seacritter.freediving",
   address: {
     streetAddress: "12 Beach Road, White Town",

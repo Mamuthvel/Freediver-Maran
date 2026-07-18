@@ -4,7 +4,6 @@ import { site } from "@/lib/site";
 import { courses } from "@/lib/courses";
 import { locations } from "@/lib/locations";
 import { getAllPosts } from "@/lib/blog";
-import { testimonials } from "@/lib/testimonials";
 import { generalFaqs } from "@/lib/faq";
 import { faqSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/JsonLd";
@@ -16,7 +15,6 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 const homeFaqs = generalFaqs.slice(0, 4);
-const homeTestimonials = testimonials.slice(0, 3);
 
 export default function HomePage() {
   const posts = getAllPosts().slice(0, 3);
@@ -125,31 +123,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── −10 M · TRANSFORMATIONS & REVIEWS ──────────── */}
+      {/* ── −10 M · REVIEWS ─────────────────────────────── */}
       <section className="bg-trench px-6 py-24">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <SectionHeading
               depth="−10 M" eyebrow="Student transformations"
-              title="They arrived nervous. They left freedivers."
-              lead="Rated 4.9★ across 312 Google reviews."
+              title="Student reviews are coming soon"
             />
           </Reveal>
-          <div className="grid gap-6 md:grid-cols-3">
-            {homeTestimonials.map((t, i) => (
-              <Reveal key={t.name} delay={i * 0.08}>
-                <figure className="flex h-full flex-col rounded-2xl border border-foam/10 bg-foam/[0.03] p-7 backdrop-blur">
-                  <p aria-hidden className="text-lagoon">★★★★★</p>
-                  <blockquote className="mt-4 flex-1 leading-relaxed text-foam/80">“{t.quote}”</blockquote>
-                  <figcaption className="mt-6 font-gauge text-xs tracking-[0.15em] text-foam/50">
-                    {t.name.toUpperCase()} · {t.origin.toUpperCase()} · {t.course.toUpperCase()}
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
           <Reveal className="mt-8">
-            <Link href="/reviews" className="font-gauge text-sm tracking-[0.15em] text-coral hover:text-shallows">READ ALL REVIEWS →</Link>
+            <Link href="/reviews" className="font-gauge text-sm tracking-[0.15em] text-coral hover:text-shallows">READ MORE →</Link>
           </Reveal>
         </div>
       </section>
@@ -175,7 +159,7 @@ export default function HomePage() {
             ))}
           </div>
           <Reveal className="mt-8">
-            <Link href="/training" className="font-gauge text-sm tracking-[0.15em] text-coral hover:text-shallows">SEE HOW WE TRAIN →</Link>
+            <Link href="/about#how-we-train" className="font-gauge text-sm tracking-[0.15em] text-coral hover:text-shallows">SEE HOW WE TRAIN →</Link>
           </Reveal>
         </div>
       </section>

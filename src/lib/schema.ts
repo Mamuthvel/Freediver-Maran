@@ -2,6 +2,7 @@ import { site, absoluteUrl } from "./site";
 import type { Course } from "./courses";
 import type { DiveLocation } from "./locations";
 import type { Faq } from "./courses";
+import type { Product } from "./store";
 
 // Central JSON-LD builders. Rendered via <JsonLd /> component.
 
@@ -22,11 +23,6 @@ export const organizationSchema = () => ({
   geo: { "@type": "GeoCoordinates", ...site.geo },
   sameAs: [site.instagram],
   priceRange: "₹₹",
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "312",
-  },
 });
 
 export const websiteSchema = () => ({
@@ -54,7 +50,7 @@ export const courseSchema = (c: Course) => ({
     "@type": "Offer",
     price: c.priceInr,
     priceCurrency: "INR",
-    availability: "https://schema.org/InStock",
+    availability: c.comingSoon ? "https://schema.org/PreOrder" : "https://schema.org/InStock",
     url: absoluteUrl(`/courses/${c.slug}`),
   },
   hasCourseInstance: {
@@ -97,6 +93,24 @@ export const articleSchema = (p: { title: string; description: string; date: str
   author: { "@type": "Person", name: "Arjun Nair", jobTitle: "PADI Freediver Instructor Trainer" },
   publisher: { "@id": absoluteUrl("/#organization") },
   image: absoluteUrl(`/blog/${p.slug}/opengraph-image`),
+});
+
+export const productSchema = (p: Product) => ({
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: p.name,
+  description: p.description,
+  category: p.category,
+  image: p.image,
+  url: absoluteUrl(`/store/${p.slug}`),
+  offers: {
+    "@type": "Offer",
+    price: p.priceInr,
+    priceCurrency: "INR",
+    availability: p.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+    url: absoluteUrl(`/store/${p.slug}`),
+    seller: { "@id": absoluteUrl("/#organization") },
+  },
 });
 
 export const breadcrumbSchema = (items: { name: string; path: string }[]) => ({

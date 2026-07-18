@@ -9,6 +9,7 @@ import { DepthMarker } from "@/components/DepthMarker";
 import { SectionHeading } from "@/components/SectionHeading";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { LeadForm } from "@/components/LeadForm";
+import { ContactForm } from "@/components/ContactForm";
 import { Reveal } from "@/components/Reveal";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -21,6 +22,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const c = getCourse(slug);
   if (!c) return {};
+  if (c.comingSoon) {
+    const title = `${c.name} — Coming Soon`;
+    return {
+      title,
+      description: `${c.tagline} The ${c.name} course is coming soon to Sea Critter, ${site.address.addressLocality}. Get in touch to be notified at launch.`,
+      alternates: { canonical: `/courses/${c.slug}` },
+      openGraph: { title, type: "website" },
+    };
+  }
   const title = `${c.name} Course in India — ₹${c.priceInr.toLocaleString("en-IN")}, ${c.duration}`;
   return {
     title,
@@ -35,6 +45,59 @@ export default async function CoursePage({ params }: Props) {
   const c = getCourse(slug);
   if (!c) notFound();
 
+  const breadcrumb = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Courses", path: "/courses" },
+    { name: c.shortName, path: `/courses/${c.slug}` },
+  ]);
+
+  if (c.comingSoon) {
+    const prevCourse = courses.find((x) => x.level === c.level - 1 && !x.comingSoon);
+    return (
+      <article className="bg-abyss">
+        <JsonLd data={[courseSchema(c), breadcrumb]} />
+
+        <header className="relative overflow-hidden bg-descent px-6 pb-16 pt-36">
+          <div className="rays" aria-hidden />
+          <div className="relative mx-auto max-w-6xl">
+            <nav aria-label="Breadcrumb" className="font-gauge text-xs tracking-[0.2em] text-foam/50">
+              <Link href="/" className="hover:text-foam">HOME</Link> / <Link href="/courses" className="hover:text-foam">COURSES</Link> / {c.shortName.toUpperCase()}
+            </nav>
+            <DepthMarker depth={c.maxDepth} label={`Level ${c.level}`} />
+            <h1 className="mt-4 max-w-2xl font-display text-4xl font-semibold leading-tight text-foam md:text-6xl">{c.name}</h1>
+            <p className="mt-4 max-w-xl text-lg text-foam/75">{c.tagline}</p>
+            <span className="mt-6 inline-block rounded-full border border-lagoon/40 px-4 py-1.5 font-gauge text-xs uppercase tracking-[0.2em] text-lagoon">
+              Coming soon
+            </span>
+          </div>
+        </header>
+
+        <section className="px-6 py-20">
+          <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[1fr_1.2fr]">
+            <Reveal>
+              <h2 className="font-display text-2xl font-semibold text-foam">We're still setting this one up</h2>
+              <p className="mt-4 leading-relaxed text-foam/75">
+                {c.name} is on the way — dates, pricing, and the full curriculum aren't published yet. Leave your details
+                and we'll reach out the moment it opens for booking.
+              </p>
+              {prevCourse && (
+                <p className="mt-6 text-sm text-foam/55">
+                  Want to start diving sooner?{" "}
+                  <Link href={`/courses/${prevCourse.slug}`} className="text-lagoon underline underline-offset-4 hover:text-shallows">
+                    See the {prevCourse.name} course →
+                  </Link>
+                </p>
+              )}
+            </Reveal>
+            <Reveal delay={0.1}>
+              <ContactForm />
+            </Reveal>
+          </div>
+        </section>
+      </article>
+    );
+  }
+
   const nextCourse = courses.find((x) => x.level === c.level + 1);
 
   return (
@@ -43,11 +106,7 @@ export default async function CoursePage({ params }: Props) {
         data={[
           courseSchema(c),
           faqSchema(c.faqs),
-          breadcrumbSchema([
-            { name: "Home", path: "/" },
-            { name: "Courses", path: "/courses" },
-            { name: c.shortName, path: `/courses/${c.slug}` },
-          ]),
+          breadcrumb,
         ]}
       />
 
@@ -85,6 +144,7 @@ export default async function CoursePage({ params }: Props) {
             <ul className="mt-4 space-y-2 text-foam/75">
               {c.whoFor.map((w) => <li key={w} className="flex gap-3"><span className="text-lagoon">◆</span>{w}</li>)}
             </ul>
+            {c.experienceNote && <p className="mt-6 text-sm text-foam/55">{c.experienceNote}</p>}
           </Reveal>
           <Reveal delay={0.1}>
             <div className="rounded-2xl border border-foam/10 bg-foam/[0.03] p-7">
@@ -127,6 +187,14 @@ export default async function CoursePage({ params }: Props) {
             <ul className="mt-5 space-y-3 text-foam/75">
               {c.skills.map((s) => <li key={s} className="flex gap-3"><span className="text-lagoon">◆</span>{s}</li>)}
             </ul>
+            {c.performanceRequirements && (
+              <>
+                <h3 className="mt-8 font-display text-xl font-semibold text-foam">Performance requirements</h3>
+                <ul className="mt-4 space-y-2 text-foam/75">
+                  {c.performanceRequirements.map((p) => <li key={p} className="flex gap-3"><span className="text-lagoon">◆</span>{p}</li>)}
+                </ul>
+              </>
+            )}
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="font-display text-2xl font-semibold text-foam">Safety, first and always</h2>

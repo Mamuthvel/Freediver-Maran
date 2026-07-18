@@ -14,17 +14,19 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
-const instructors: { name: string; role: string; bio: string; pb?: string; location?: string }[] = [
-  { name: "Arjun Nair", role: "Founder · PADI Freediver Instructor Trainer", bio: "1,500+ students taught, national-record safety diver, and the reason our protocols read like an airline's.", pb: "−62 M" },
-  { name: "Meera Krishnan", role: "PADI Freediver Instructor", bio: "Former competitive swimmer specialising in equalization coaching and first-timer nerves.", pb: "−45 M" },
-  { name: "Daniel Costa", role: "PADI Master Freediver Instructor", bio: "Runs our Andaman depth camps and Maldives expeditions. Fluent in Portuguese, Hindi, and manta body language.", pb: "−71 M" },
-  {
-    name: "Maran",
-    role: "Freediving & Scuba Instructor",
-    location: "Based in Dubai",
-    bio: "5+ years teaching and exploring the underwater world. Leads our Dubai programme, Deep Dive Dubai — for him, diving is a way to reconnect with nature and find calm in silence.",
-  },
+const pillars = [
+  ["Safety as culture", "One instructor per four students, a buddy on every breath-hold, oxygen on every boat. Eight years, zero incidents."],
+  ["Actual coaching", "Small batches mean your equalization, your finning, your nerves get individual attention — not a queue on a line."],
+  ["Real ocean, year-round", "Home reefs in Pondicherry plus seasonal camps in Goa, the Andamans, and the Maldives."],
+  ["Certification that travels", "PADI ratings recognised at every freediving centre on Earth, from Dahab to Dominica."],
 ];
+
+const instructor = {
+  name: "Maran",
+  role: "Freediving & Scuba Instructor",
+  location: "Based in Dubai",
+  bio: "5+ years teaching and exploring the underwater world. Leads our Dubai programme, Deep Dive Dubai — for him, diving is a way to reconnect with nature and find calm in silence.",
+};
 
 export default function AboutPage() {
   return (
@@ -80,49 +82,44 @@ export default function AboutPage() {
               countries, home training in {site.address.addressLocality}, and seasonal courses and expeditions in Goa, the Andaman Islands, and
               the Maldives — all taught to the same PADI standard, by the same small team.
             </p>
-            <p className="mt-6 text-sm text-foam/55">
-              Want the training philosophy behind the numbers? See{" "}
-              <Link href="/training" className="text-lagoon underline underline-offset-4 hover:text-shallows">how we train →</Link>
-            </p>
           </Reveal>
+        </div>
+      </section>
+
+      <section id="how-we-train" className="px-6 py-20">
+        <div className="mx-auto max-w-6xl">
+          <Reveal><SectionHeading depth="−6 M" eyebrow="How we train" title="Why students choose Sea Critter" /></Reveal>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {pillars.map(([t, d], i) => (
+              <Reveal key={t} delay={i * 0.07}>
+                <div className="h-full rounded-2xl border border-foam/10 p-6">
+                  <p className="font-gauge text-lagoon">{String(i + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-3 font-display text-lg font-semibold text-foam">{t}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-foam/65">{d}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="bg-trench px-6 py-20">
         <div className="mx-auto max-w-6xl">
           <Reveal><SectionHeading depth="−8 M" eyebrow="Instructors" title="Meet the people who'll hold your line" /></Reveal>
-          <div className="grid gap-6 md:grid-cols-3">
-            {instructors.map((p, i) => {
-              const cardClass = `block h-full rounded-2xl border border-foam/10 bg-foam/[0.03] p-7${p.name === "Maran" ? " transition hover:border-lagoon/40" : ""}`;
-              const content = (
-                <>
-                  <div className="flex items-center justify-between">
-                    <div aria-hidden className="grid h-14 w-14 place-items-center rounded-full bg-ocean font-display text-xl text-shallows">
-                      {p.name.split(" ").map((n) => n[0]).join("")}
-                    </div>
-                    {p.pb ? (
-                      <span className="font-gauge text-sm text-lagoon" title="Personal best depth">PB {p.pb}</span>
-                    ) : p.location ? (
-                      <span className="font-gauge text-xs uppercase tracking-[0.15em] text-lagoon">{p.location}</span>
-                    ) : null}
-                  </div>
-                  <h3 className="mt-5 font-display text-xl font-semibold text-foam">{p.name}</h3>
-                  <p className="mt-1 text-sm text-shallows/70">{p.role}</p>
-                  <p className="mt-3 text-sm leading-relaxed text-foam/65">{p.bio}</p>
-                  {p.name === "Maran" && <p className="mt-4 text-sm text-coral">Meet Maran & Deep Dive Dubai →</p>}
-                </>
-              );
-              return (
-                <Reveal key={p.name} delay={i * 0.08}>
-                  {p.name === "Maran" ? (
-                    <Link href="/deep-dive-dubai" className={cardClass}>{content}</Link>
-                  ) : (
-                    <article className={cardClass}>{content}</article>
-                  )}
-                </Reveal>
-              );
-            })}
-          </div>
+          <Reveal className="mx-auto max-w-sm">
+            <Link href="/deep-dive-dubai" className="block h-full rounded-2xl border border-foam/10 bg-foam/[0.03] p-7 transition hover:border-lagoon/40">
+              <div className="flex items-center justify-between">
+                <div aria-hidden className="grid h-14 w-14 place-items-center rounded-full bg-ocean font-display text-xl text-shallows">
+                  {instructor.name.split(" ").map((n) => n[0]).join("")}
+                </div>
+                <span className="font-gauge text-xs uppercase tracking-[0.15em] text-lagoon">{instructor.location}</span>
+              </div>
+              <h3 className="mt-5 font-display text-xl font-semibold text-foam">{instructor.name}</h3>
+              <p className="mt-1 text-sm text-shallows/70">{instructor.role}</p>
+              <p className="mt-3 text-sm leading-relaxed text-foam/65">{instructor.bio}</p>
+              <p className="mt-4 text-sm text-coral">Meet Maran & Deep Dive Dubai →</p>
+            </Link>
+          </Reveal>
         </div>
       </section>
 
